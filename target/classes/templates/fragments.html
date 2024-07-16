@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Fragments</title>
+</head>
+<body>
+
+<div th:fragment="test-fragment">
+    <p>This is a test fragment.</p>
+</div>
+
+<div th:fragment="common-navbar">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    </nav>
+</div>
+
+<div th:fragment="common-sidebar" class="col-md-2 bg-light full-height">
+    <div class="d-flex flex-column align-items-stretch">
+        <div class="col-12 p-1">
+            <a class="btn stylish-btn w-100" href="/api/fundraiser/">Home</a>
+        </div>
+        <div class="col-12 p-1">
+            <a class="btn stylish-btn w-100" href="/api/fundraiser/account/loginButton">Login</a>
+        </div>
+        <div class="col-12 p-1">
+            <a class="btn stylish-btn w-100" href="/api/fundraiser/payment/">Update balance</a>
+        </div>
+        <div class="col-12 p-1">
+            <a class="btn stylish-btn w-100" href="/api/fundraiser/account/saveButton">New Account</a>
+        </div>
+        <div class="col-12 p-1">
+            <a class="btn stylish-btn w-100" href="/api/fundraiser/account/resetPasswordForm">Password Forgotten</a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

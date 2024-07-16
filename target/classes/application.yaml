@@ -1,0 +1,75 @@
+appConfig:
+  host: http://localhost
+  port: 8080
+  context-path: /api/fundraiser
+  paypal:
+    client-id: ${paypal.client-id}
+    client-secret: ${paypal.client-secret}
+    mode: sandbox #Use 'sandbox' for testing and '#live' for production
+  payment:
+    cancel-url: ${appConfig.host}:${appConfig.port}${appConfig.context-path}/payment/cancel
+    success-url: ${appConfig.host}:${appConfig.port}${appConfig.context-path}/payment/success
+    action:
+      create: ${appConfig.context-path}/payment/create
+server:
+  port: 8080
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/angular_fundraiser?createDatabaseIfNotExist=true&serverTimezone=UTC&useUnicode=true&characterEncoding=utf8
+    username: root
+    password: ${db.password}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        jdbc:
+          time_zone: Europe/Budapest
+    generate-ddl: true
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${mail.address}
+    password: ${mail.password}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+  servlet:
+    multipart:
+      max-file-size: 40MB
+      max-request-size: 40MB
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: HTML
+logging:
+  level:
+    hu.progmasters: debug
+    org.springframework.web: info
+    org.hibernate: error
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+
+scheduled:
+  task:
+    default:
+      rate: 86_400_000
+
+  exchange:
+    initial-delay: 21600000
+    fixed-delay: 21600000
+
+  transaction:
+    cron: "0 * * * * ?"
